@@ -6,7 +6,7 @@ class TwilioPowerOutlet < Sinatra::Base
   end
 
   get_or_post '/sms/?' do
-  	Pusher['robot_channel'].trigger('powerSwitch', {:Body => params['Body'], :From => params['From']})
+  	Pusher['robot_channel'].trigger('powersms', {:Body => params['Body'].downcase, :From => params['From']})
     response = Twilio::TwiML::Response.new do |r|
       r.Sms 'Received'
     end
