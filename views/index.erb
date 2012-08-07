@@ -1,8 +1,10 @@
+<%= sent %><br />
 <form action="/control/" method="POST">
+  <input type="hidden" name="web" value="1" />
   <select name="Body">
     <option value="on">Turn On</option>
     <option value="off">Turn Off</option>
   </select>
   <br />Phone Number: <input type="text" name="From">
-  <br /><input type="submit">
+  <br /><input type="submit" />
 </form>

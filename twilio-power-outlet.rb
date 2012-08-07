@@ -9,11 +9,21 @@ configure do
 end
 
 post '/control/?' do
-	Pusher['robot_channel'].trigger('powersms', {:Body => params['Body'].downcase, :From => params['From']})
-	response = Twilio::TwiML::Response.new do |r|
-  	r.Sms 'Received'
+	output = "Message transmitted"
+	begin
+		Pusher['robot_channel'].trigger('powersms', {:Body => params['Body'].downcase, :From => params['From']})
+  rescue Pusher::Error => e
+    output = "Failed: #{e.message}"
+  end
+
+	if params['web'] == '1'
+		erb :index, :locals => {:sent => output}
+	else
+		response = Twilio::TwiML::Response.new do |r|
+	  	r.Sms output
+		end
+		response.text
 	end
-	response.text
 end
 
 get '/' do
