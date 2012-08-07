@@ -17,7 +17,7 @@ post '/control/?' do
   end
 
 	if params['web'] == '1'
-		erb :index, :locals => {:sent => output}
+		erb :index, :locals => {:msg => output}
 	else
 		response = Twilio::TwiML::Response.new do |r|
 	  	r.Sms output
@@ -27,5 +27,5 @@ post '/control/?' do
 end
 
 get '/' do
-  erb :index
+  erb :index, :locals => {:msg => "Control the Outlet"}
 end
