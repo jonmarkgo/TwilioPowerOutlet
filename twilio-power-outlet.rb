@@ -11,7 +11,7 @@ end
 post '/control/?' do
 	output = "Message transmitted"
 	begin
-		Pusher['robot_channel'].trigger('powersms', {:Body => params['Body'].downcase, :From => params['From']})
+		Pusher['robot_channel'].trigger('powersms', {:command => params['Body'].downcase})
   rescue Pusher::Error => e
     output = "Failed: #{e.message}"
   end
