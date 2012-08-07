@@ -8,7 +8,7 @@ configure do
 	Pusher.secret = ENV['PUSHER_SECRET']
 end
 
-get_or_post '/sms/?' do
+post '/sms/?' do
 	Pusher['robot_channel'].trigger('powersms', {:Body => params['Body'].downcase, :From => params['From']})
 	response = Twilio::TwiML::Response.new do |r|
   	r.Sms 'Received'
