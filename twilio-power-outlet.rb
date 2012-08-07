@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'twilio-ruby'
+require 'pusher'
 
 configure do
 	Pusher.app_id = ENV['PUSHER_APP_ID']
