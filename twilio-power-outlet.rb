@@ -16,7 +16,7 @@ post '/control/?' do
     output = "Failed: #{e.message}"
   end
 
-  if params['web'] == '1'
+  if params['SmsSid'] == nil
     erb :index, :locals => {:msg => output}
   else
     response = Twilio::TwiML::Response.new do |r|
